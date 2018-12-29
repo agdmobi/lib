@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.agooday.preference">
+
+    <application
+            android:allowBackup="true"
+            android:supportsRtl="true">
+        <provider
+                android:name=".AGDProvider"
+                android:authorities="@string/agooday_author"
+                android:exported="false"/>
+
+    </application>
+
+</manifest>
