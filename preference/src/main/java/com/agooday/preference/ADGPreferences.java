@@ -28,15 +28,15 @@ public class ADGPreferences implements SharedPreferences {
     private BroadcastReceiver mPreferencesChangeReceiver;
     private static final HashMap<String, ADGPreferences> sPrefers = new HashMap<>();
 
-    private ADGPreferences(Context context, String name, int mode) {
+    public ADGPreferences(Context context) {
         mContext = context.getApplicationContext();
-        mName = name;
-        mMode = mode;
+        mName = context.getPackageName();
+        mMode = MODE_DEFAULT;
     }
 
 
 
-    public static ADGPreferences getInstance(Context context) {
+    /*public static ADGPreferences getInstance(Context context) {
         return getInstance(context, context.getPackageName(), MODE_DEFAULT);
     }
 
@@ -49,7 +49,7 @@ public class ADGPreferences implements SharedPreferences {
             }
             return tp;
         }
-    }
+    }*/
 
     @Override
     public Map<String, ?> getAll() {
