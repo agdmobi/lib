@@ -46,12 +46,12 @@ public class AGDProvider extends ContentProvider {
         Cursor cursor = null;
         List<String> paths = uri.getPathSegments();
         String name = paths.get(0);
-        boolean inMemory = Integer.parseInt(paths.get(1)) == ADGPreferences.MODE_IN_MEMORY;
+        boolean inMemory = Integer.parseInt(paths.get(1)) == ADGPreference.MODE_IN_MEMORY;
         switch (mUriMatcher.match(uri)) {
             case QUERY_GET:
                 int type = Integer.parseInt(sortOrder);
                 switch (type) {
-                    case ADGPreferences.TYPE_STRING:
+                    case ADGPreference.TYPE_STRING:
                         String string;
                         if (inMemory) {
                             string = (String) getFromMemoryPreferences(name, projection[0]);
@@ -60,7 +60,7 @@ public class AGDProvider extends ContentProvider {
                         }
                         cursor = new AGDCursor(string == null ? 0 : 1, string);
                         break;
-                    case ADGPreferences.TYPE_STRING_SET:
+                    case ADGPreference.TYPE_STRING_SET:
                         Set<String> set;
                         if (inMemory) {
                             set = (Set<String>) getFromMemoryPreferences(name, projection[0]);
@@ -73,7 +73,7 @@ public class AGDProvider extends ContentProvider {
                         }
                         cursor = new AGDCursor(set == null ? 0 : 1, setJsonStr);
                         break;
-                    case ADGPreferences.TYPE_INT:
+                    case ADGPreference.TYPE_INT:
                         int intVal;
                         if (inMemory) {
                             Object valObj = getFromMemoryPreferences(name, projection[0]);
@@ -83,7 +83,7 @@ public class AGDProvider extends ContentProvider {
                         }
                         cursor = new AGDCursor(1, intVal);
                         break;
-                    case ADGPreferences.TYPE_LONG:
+                    case ADGPreference.TYPE_LONG:
                         long longVal;
                         if (inMemory) {
                             Object valObj = getFromMemoryPreferences(name, projection[0]);
@@ -93,7 +93,7 @@ public class AGDProvider extends ContentProvider {
                         }
                         cursor = new AGDCursor(1, longVal);
                         break;
-                    case ADGPreferences.TYPE_FLOAT:
+                    case ADGPreference.TYPE_FLOAT:
                         float floatVal;
                         if (inMemory) {
                             Object valObj = getFromMemoryPreferences(name, projection[0]);
@@ -103,7 +103,7 @@ public class AGDProvider extends ContentProvider {
                         }
                         cursor = new AGDCursor(1, floatVal);
                         break;
-                    case ADGPreferences.TYPE_BOOLEAN:
+                    case ADGPreference.TYPE_BOOLEAN:
                         boolean booleanVal;
                         if (inMemory) {
                             Object valObj = getFromMemoryPreferences(name, projection[0]);
@@ -133,32 +133,32 @@ public class AGDProvider extends ContentProvider {
                             json.put(key, JSONObject.NULL);
                         } else if (value instanceof String) {
                             JSONArray array = new JSONArray();
-                            array.put(ADGPreferences.TYPE_STRING);
+                            array.put(ADGPreference.TYPE_STRING);
                             array.put(value);
                             json.put(key, array);
                         } else if (value instanceof Set) {
                             JSONArray array = new JSONArray();
-                            array.put(ADGPreferences.TYPE_STRING_SET);
+                            array.put(ADGPreference.TYPE_STRING_SET);
                             array.put(stringSetToJSONArray((Set<String>) value));
                             json.put(key, array);
                         } else if (value instanceof Integer) {
                             JSONArray array = new JSONArray();
-                            array.put(ADGPreferences.TYPE_INT);
+                            array.put(ADGPreference.TYPE_INT);
                             array.put(value);
                             json.put(key, array);
                         } else if (value instanceof Long) {
                             JSONArray array = new JSONArray();
-                            array.put(ADGPreferences.TYPE_LONG);
+                            array.put(ADGPreference.TYPE_LONG);
                             array.put(value);
                             json.put(key, array);
                         } else if (value instanceof Float) {
                             JSONArray array = new JSONArray();
-                            array.put(ADGPreferences.TYPE_FLOAT);
+                            array.put(ADGPreference.TYPE_FLOAT);
                             array.put(value);
                             json.put(key, array);
                         } else if (value instanceof Boolean) {
                             JSONArray array = new JSONArray();
-                            array.put(ADGPreferences.TYPE_BOOLEAN);
+                            array.put(ADGPreference.TYPE_BOOLEAN);
                             array.put(value);
                             json.put(key, array);
                         }
@@ -264,7 +264,7 @@ public class AGDProvider extends ContentProvider {
     public int update(@SuppressWarnings("NullableProblems") Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         List<String> paths = uri.getPathSegments();
         String name = paths.get(0);
-        boolean inMemory = Integer.parseInt(paths.get(1)) == ADGPreferences.MODE_IN_MEMORY;
+        boolean inMemory = Integer.parseInt(paths.get(1)) == ADGPreference.MODE_IN_MEMORY;
         boolean clear = Boolean.parseBoolean(uri.getQueryParameter(AGDContract.PARAM_CLEAR));
         ArrayList<String> modifiedKeys = new ArrayList<>();
         if (inMemory) {

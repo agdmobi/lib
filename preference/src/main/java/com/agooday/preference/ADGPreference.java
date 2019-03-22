@@ -10,25 +10,24 @@ import org.json.JSONObject;
 
 import java.util.*;
 
-public class ADGPreferences implements SharedPreferences {
-    public static final int MODE_DEFAULT = 0;
-    public static final int MODE_IN_MEMORY = 1;
+public class ADGPreference implements SharedPreferences {
+    static final int MODE_DEFAULT = 0;
+    static final int MODE_IN_MEMORY = 1;
 
-    public static final int TYPE_STRING = 1;
-    public static final int TYPE_STRING_SET = 2;
-    public static final int TYPE_INT = 3;
-    public static final int TYPE_LONG = 4;
-    public static final int TYPE_FLOAT = 5;
-    public static final int TYPE_BOOLEAN = 6;
+    static final int TYPE_STRING = 1;
+    static final int TYPE_STRING_SET = 2;
+    static final int TYPE_INT = 3;
+    static final int TYPE_LONG = 4;
+    static final int TYPE_FLOAT = 5;
+    static final int TYPE_BOOLEAN = 6;
 
     private Context mContext;
     private String mName;
     private int mMode;
     private final WeakHashMap<OnSharedPreferenceChangeListener, List<String>> mListeners = new WeakHashMap<>();
     private BroadcastReceiver mPreferencesChangeReceiver;
-    private static final HashMap<String, ADGPreferences> sPrefers = new HashMap<>();
 
-    public ADGPreferences(Context context) {
+    public ADGPreference(Context context) {
         mContext = context.getApplicationContext();
         mName = context.getPackageName();
         mMode = MODE_DEFAULT;
@@ -36,15 +35,15 @@ public class ADGPreferences implements SharedPreferences {
 
 
 
-    /*public static ADGPreferences getInstance(Context context) {
+    /*public static ADGPreference getInstance(Context context) {
         return getInstance(context, context.getPackageName(), MODE_DEFAULT);
     }
 
-    public static ADGPreferences getInstance(Context context, String name, int mode) {
+    public static ADGPreference getInstance(Context context, String name, int mode) {
         synchronized (sPrefers) {
-            ADGPreferences tp = sPrefers.get(name);
+            ADGPreference tp = sPrefers.get(name);
             if (tp == null) {
-                tp = new ADGPreferences(context, name, mode);
+                tp = new ADGPreference(context, name, mode);
                 sPrefers.put(name, tp);
             }
             return tp;
@@ -66,7 +65,7 @@ public class ADGPreferences implements SharedPreferences {
             if (cursor != null) {
                 while (cursor.moveToNext()) {
                     JSONObject json = new JSONObject(cursor.getString(0));
-                    for (Iterator<String> it = json.keys(); it.hasNext();) {
+                    for (Iterator<String> it = json.keys(); it.hasNext(); ) {
                         String key = it.next();
                         if (json.isNull(key)) {
                             map.put(key, null);
@@ -74,23 +73,23 @@ public class ADGPreferences implements SharedPreferences {
                             JSONArray array = json.getJSONArray(key);
                             int type = array.getInt(0);
                             switch (type) {
-                                case ADGPreferences.TYPE_STRING:
+                                case ADGPreference.TYPE_STRING:
                                     map.put(key, array.getString(1));
                                     break;
-                                case ADGPreferences.TYPE_STRING_SET:
+                                case ADGPreference.TYPE_STRING_SET:
                                     map.put(key, AGDProvider.jsonArrayToStringSet(array.getJSONArray(1)));
                                     break;
-                                case ADGPreferences.TYPE_INT:
+                                case ADGPreference.TYPE_INT:
                                     map.put(key, array.getInt(1));
                                     break;
-                                case ADGPreferences.TYPE_LONG:
+                                case ADGPreference.TYPE_LONG:
                                     map.put(key, array.getLong(1));
                                     break;
-                                case ADGPreferences.TYPE_FLOAT:
+                                case ADGPreference.TYPE_FLOAT:
                                     float f = (float) array.getDouble(1);
                                     map.put(key, f);
                                     break;
-                                case ADGPreferences.TYPE_BOOLEAN:
+                                case ADGPreference.TYPE_BOOLEAN:
                                     map.put(key, array.getBoolean(1));
                                     break;
                             }
@@ -276,14 +275,14 @@ public class ADGPreferences implements SharedPreferences {
     /**
      * This method is expensive.
      * You should use {@link #registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener, List keys)} instead to achieve performance.
-     * */
+     */
     @Deprecated
     @Override
     public void registerOnSharedPreferenceChangeListener(final OnSharedPreferenceChangeListener listener) {
         if (listener == null) {
             return;
         }
-        synchronized(mListeners) {
+        synchronized (mListeners) {
             mListeners.put(listener, null);
             registerChangeReceiver();
         }
@@ -308,8 +307,8 @@ public class ADGPreferences implements SharedPreferences {
 
     /**
      * @param listener The callback that will run.
-     * @param keys The keys that be listened.
-     * */
+     * @param keys     The keys that be listened.
+     */
     public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener, List<String> keys) {
         if (listener == null || keys == null || keys.size() == 0) {
             return;
@@ -343,7 +342,7 @@ public class ADGPreferences implements SharedPreferences {
             return;
         }
         String[] keys = null;
-        synchronized(mListeners) {
+        synchronized (mListeners) {
             List<String> keyList = mListeners.remove(listener);
             if (keyList != null) {
                 keys = keyList.toArray(new String[keyList.size()]);
@@ -392,7 +391,7 @@ public class ADGPreferences implements SharedPreferences {
                         }
                         for (int i = listeners.size() - 1; i >= 0; i--) {
                             Pair<OnSharedPreferenceChangeListener, String> pair = listeners.get(i);
-                            pair.first.onSharedPreferenceChanged(ADGPreferences.this, pair.second);
+                            pair.first.onSharedPreferenceChanged(ADGPreference.this, pair.second);
                         }
                     }
                 }
@@ -433,7 +432,8 @@ public class ADGPreferences implements SharedPreferences {
         if (cursor != null) {
             try {
                 cursor.close();
-            } catch (Throwable ignored) {}
+            } catch (Throwable ignored) {
+            }
         }
     }
 
@@ -441,7 +441,8 @@ public class ADGPreferences implements SharedPreferences {
         if (client != null) {
             try {
                 client.release();
-            } catch (Throwable ignored) {}
+            } catch (Throwable ignored) {
+            }
         }
     }
 
