@@ -7,7 +7,7 @@ class AGDPreferenceManager{
     fun initialize(context: Context) {
         sADGPreferences = ADGPreference(context)
     }
-    
+
     companion object {
         private var sInstance: AGDPreferenceManager? = null
         fun getInstance(): AGDPreferenceManager {
