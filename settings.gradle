@@ -1,1 +1,1 @@
-include ':app', ':customview', ':preference'
+include ':app', ':customview', ':preference', ':daterangepicker'
