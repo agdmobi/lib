@@ -180,6 +180,7 @@ public class GridAdapter extends ArrayAdapter {
             (view.findViewById(R.id.txtDate)).setAlpha(.2f);
         }
 
+
         return view;
     }
 

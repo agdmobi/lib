@@ -27,6 +27,26 @@ public class SlyCalendarData {
     private Integer selectedTextColor = null;
     private Integer timeTheme = null;
 
+    public void setConfirmBg(Integer confirmBg) {
+        this.confirmBg = confirmBg;
+    }
+
+    public void setConfirmTitle(String confirmTitle) {
+        this.confirmTitle = confirmTitle;
+    }
+
+    private Integer confirmBg = null;
+
+    public Integer getConfirmBg() {
+        return confirmBg;
+    }
+
+    public String getConfirmTitle() {
+        return confirmTitle;
+    }
+
+    private String confirmTitle = null;
+
     public Date getShowDate() {
         if (showDate == null) {
             if (selectedStartDate != null) {

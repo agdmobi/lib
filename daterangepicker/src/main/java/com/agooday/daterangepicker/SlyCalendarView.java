@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -37,7 +39,7 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
     public SlyCalendarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         //Log.d("tien.hien","SlyCalendarView 2");
-        init(null, 0);
+        init(attrs, 0);
         this.attrs = attrs;
     }
 
@@ -65,10 +67,12 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
 
     private void init(@Nullable AttributeSet attrs, int defStyle) {
         slyCalendarData = new SlyCalendarData();
-        slyCalendarData.setSingle(false);
+
 
         inflate(getContext(), R.layout.slycalendar_frame, this);
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SlyCalendarView, defStyle, 0);
+
+
 
         if (slyCalendarData.getBackgroundColor() == null) {
             slyCalendarData.setBackgroundColor(typedArray.getColor(R.styleable.SlyCalendarView_backgroundColor, ContextCompat.getColor(getContext(), R.color.slycalendar_defBackgroundColor)));
@@ -89,13 +93,25 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
             slyCalendarData.setSelectedTextColor(typedArray.getColor(R.styleable.SlyCalendarView_selectedTextColor, ContextCompat.getColor(getContext(), R.color.slycalendar_defSelectedTextColor)));
         }
 
+        if (slyCalendarData.getConfirmBg() == null) {
+            slyCalendarData.setConfirmBg(typedArray.getColor(R.styleable.SlyCalendarView_confirmBg, ContextCompat.getColor(getContext(), R.color.slycalendar_defConfirmBGColor)));
+        }
+
+        if (slyCalendarData.getConfirmTitle() == null) {
+            slyCalendarData.setConfirmTitle(typedArray.getString(R.styleable.SlyCalendarView_confirmTitle));
+        }
+        /*boolean singleMode = typedArray.getBoolean(R.styleable.SlyCalendarView_singleMode, false);
+        Log.d("tien.hien","single Mode = "+singleMode);*/
+        slyCalendarData.setSingle(typedArray.getBoolean(R.styleable.SlyCalendarView_singleMode, false));
+        //slyCalendarData.setSingle(false);
+
         typedArray.recycle();
 
 
 
-        // TextView txtSave  = findViewById(R.id.txtSave);
-        //txtSave.setText(typedArray.getString(R.styleable.SlyCalendarView_confirmTitle));
-        //txtSave.setBackgroundColor(typedArray.getColor(R.styleable.SlyCalendarView_confirmBg,ContextCompat.getColor(getContext(), R.color.slycalendar_defConfirmBGColor)));
+        /*TextView txtSave  = findViewById(R.id.txtSave);
+        txtSave.setText(typedArray.getString(R.styleable.SlyCalendarView_confirmTitle));
+        txtSave.setBackgroundColor(typedArray.getColor(R.styleable.SlyCalendarView_confirmBg,ContextCompat.getColor(getContext(), R.color.slycalendar_defConfirmBGColor)));*/
 
         final ViewPager vpager = findViewById(R.id.content);
         vpager.setAdapter(new MonthPagerAdapter(slyCalendarData, this));
@@ -243,10 +259,11 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
 
     private void paintCalendar() {
         findViewById(R.id.mainFrame).setBackgroundColor(slyCalendarData.getBackgroundColor());
-        /*findViewById(R.id.headerView).setBackgroundColor(slyCalendarData.getHeaderColor());
-        ((TextView) findViewById(R.id.txtYear)).setTextColor(slyCalendarData.getHeaderTextColor());
-        ((TextView) findViewById(R.id.txtSelectedPeriod)).setTextColor(slyCalendarData.getHeaderTextColor());
-        //((TextView) findViewById(R.id.txtTime)).setTextColor(slyCalendarData.getHeaderColor());*/
+
+
+        if(slyCalendarData.getConfirmTitle()!= null)
+            ((TextView) findViewById(R.id.txtSave)).setText(slyCalendarData.getConfirmTitle());
+        ((TextView) findViewById(R.id.txtSave)).setBackgroundColor(slyCalendarData.getConfirmBg());
 
     }
 

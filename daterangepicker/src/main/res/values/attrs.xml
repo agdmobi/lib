@@ -10,5 +10,6 @@
         <attr name="firstMonday" format="boolean"/>
         <attr name="confirmTitle" format="string"/>
         <attr name="confirmBg" format="color"/>
+        <attr name="singleMode" format="boolean"/>
     </declare-styleable>
 </resources>
