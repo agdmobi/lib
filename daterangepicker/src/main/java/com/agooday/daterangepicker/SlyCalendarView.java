@@ -63,11 +63,11 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
         this.completeListener = completeListener;
     }
 
-    /*public void setSlyCalendarData(SlyCalendarData slyCalendarData) {
+    public void setSlyCalendarData(SlyCalendarData slyCalendarData) {
         this.slyCalendarData = slyCalendarData;
         init(attrs, defStyleAttr);
         showCalendar();
-    }*/
+    }
 
     private void init(@Nullable AttributeSet attrs, int defStyle) {
         slyCalendarData = new SlyCalendarData();
@@ -101,9 +101,7 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
             slyCalendarData.setConfirmBg(typedArray.getColor(R.styleable.SlyCalendarView_confirmBg, ContextCompat.getColor(getContext(), R.color.slycalendar_defConfirmBGColor)));
         }
 
-        if (slyCalendarData.getConfirmTitle() == null) {
-            slyCalendarData.setConfirmTitle(typedArray.getString(R.styleable.SlyCalendarView_confirmTitle));
-        }
+        slyCalendarData.setConfirmTitle(typedArray.getString(R.styleable.SlyCalendarView_confirmTitle));
         /*boolean singleMode = typedArray.getBoolean(R.styleable.SlyCalendarView_singleMode, false);
         Log.d("tien.hien","single Mode = "+singleMode);*/
         slyCalendarData.setSingle(typedArray.getBoolean(R.styleable.SlyCalendarView_singleMode, false));
