@@ -11,5 +11,6 @@
         <attr name="confirmTitle" format="string"/>
         <attr name="confirmBg" format="color"/>
         <attr name="singleMode" format="boolean"/>
+        <attr name="pickHour" format="boolean"/>
     </declare-styleable>
 </resources>

@@ -1,5 +1,6 @@
 package com.agooday.daterangepicker;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
@@ -10,9 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by psinetron on 29/11/2018.
@@ -103,6 +107,7 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
         /*boolean singleMode = typedArray.getBoolean(R.styleable.SlyCalendarView_singleMode, false);
         Log.d("tien.hien","single Mode = "+singleMode);*/
         slyCalendarData.setSingle(typedArray.getBoolean(R.styleable.SlyCalendarView_singleMode, false));
+        slyCalendarData.setPickHour(typedArray.getBoolean(R.styleable.SlyCalendarView_pickHour, false));
         //slyCalendarData.setSingle(false);
 
         typedArray.recycle();
@@ -192,7 +197,7 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
             }
         });
 
-        /*findViewById(R.id.txtTime).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.txtTime).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -211,7 +216,12 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
                 }, slyCalendarData.getSelectedHour(), slyCalendarData.getSelectedMinutes(), true);
                 tpd.show();
             }
-        });*/
+        });
+        if(slyCalendarData.isPickHour()){
+            findViewById(R.id.txtTime).setVisibility(View.VISIBLE);
+        }else{
+            findViewById(R.id.txtTime).setVisibility(View.GONE);
+        }
 
         ViewPager vpager = findViewById(R.id.content);
         vpager.getAdapter().notifyDataSetChanged();
@@ -259,7 +269,7 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
 
     private void paintCalendar() {
         findViewById(R.id.mainFrame).setBackgroundColor(slyCalendarData.getBackgroundColor());
-
+        ((TextView) findViewById(R.id.txtTime)).setTextColor(slyCalendarData.getHeaderColor());
 
         if(slyCalendarData.getConfirmTitle()!= null)
             ((TextView) findViewById(R.id.txtSave)).setText(slyCalendarData.getConfirmTitle());
@@ -272,9 +282,9 @@ public class SlyCalendarView extends FrameLayout implements DateSelectListener {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, slyCalendarData.getSelectedHour());
         calendar.set(Calendar.MINUTE, slyCalendarData.getSelectedMinutes());
-        /*((TextView) findViewById(R.id.txtTime)).setText(
+        ((TextView) findViewById(R.id.txtTime)).setText(
                 new SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.getTime())
-        );*/
+        );
 
     }
 

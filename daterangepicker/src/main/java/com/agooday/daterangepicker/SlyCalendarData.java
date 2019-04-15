@@ -17,7 +17,18 @@ public class SlyCalendarData {
 
 
     private boolean firstMonday = true; // is first monday
+
+    public void setPickHour(boolean pickHour) {
+        this.pickHour = pickHour;
+    }
+
     private boolean single = true;
+
+    public boolean isPickHour() {
+        return pickHour;
+    }
+
+    private boolean pickHour= true;
 
     private Integer backgroundColor = null;
     private Integer headerColor = null;
