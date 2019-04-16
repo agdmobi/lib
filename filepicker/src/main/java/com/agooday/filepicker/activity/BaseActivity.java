@@ -60,12 +60,12 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
      */
     @AfterPermissionGranted(RC_READ_EXTERNAL_STORAGE)
     private void readExternalStorage() {
-        boolean isGranted = EasyPermissions.hasPermissions(this, "android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE");
+        boolean isGranted = EasyPermissions.hasPermissions(this, "android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE","android.permission.CAMERA");
         if (isGranted) {
             permissionGranted();
         } else {
             EasyPermissions.requestPermissions(this, getString(R.string.vw_rationale_storage),
-                    RC_READ_EXTERNAL_STORAGE, "android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE");
+                    RC_READ_EXTERNAL_STORAGE, "android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE","android.permission.CAMERA");
         }
     }
 
@@ -92,7 +92,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
 
         if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
             // Do something after user returned from app settings screen, like showing a Toast.
-            if (EasyPermissions.hasPermissions(this, "android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE")) {
+            if (EasyPermissions.hasPermissions(this, "android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE","android.permission.CAMERA")) {
                 permissionGranted();
             } else {
                 finish();
