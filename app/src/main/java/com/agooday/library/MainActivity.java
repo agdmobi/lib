@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        findViewById(R.id.pickDate).setOnClickListener(this);
         mTvResult = (TextView) findViewById(R.id.tv_result);
     }
 
@@ -67,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent4.putExtra(NormalFilePickActivity.SUFFIX,
                         new String[]{"xlsx", "xls", "doc", "dOcX", "ppt", ".pptx", "pdf"});
                 startActivityForResult(intent4, Constant.REQUEST_CODE_PICK_FILE);
+                break;
+            case R.id.pickDate:
+                RangeDatePickerDialog dialog = new RangeDatePickerDialog(this);
+                dialog.show();
                 break;
         }
     }

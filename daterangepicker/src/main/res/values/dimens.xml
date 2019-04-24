@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="cell_size">34dp</dimen>
+    <dimen name="content_calendar_height">285dp</dimen>
+</resources>

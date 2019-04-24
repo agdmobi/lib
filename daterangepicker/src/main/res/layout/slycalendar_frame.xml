@@ -12,11 +12,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <android.support.v4.view.ViewPager
             android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="308dp"
+            android:layout_height="@dimen/content_calendar_height"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             />
@@ -25,7 +24,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_height="48dp"
             android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/btnMonthPrev"
                 android:layout_width="48dp"
@@ -36,13 +34,11 @@
                 android:padding="12dp"
                 app:srcCompat="@drawable/slycalendar_chevron_left"
                 tools:ignore="VectorDrawableCompat" />
-
             <View
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 />
-
             <ImageView
                 android:id="@+id/btnMonthNext"
                 android:layout_width="48dp"
@@ -99,7 +95,6 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:textColor="#ffffff"
         android:fontFamily="sans-serif-medium"
-
         />
 
 </LinearLayout>
