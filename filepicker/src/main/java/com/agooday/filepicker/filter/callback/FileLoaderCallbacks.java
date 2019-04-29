@@ -267,10 +267,12 @@ public class FileLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cursor
 
     private boolean contains(String path) {
         String name = Util.extractFileNameWithSuffix(path);
-        Pattern pattern = Pattern.compile(mSuffixRegex, Pattern.CASE_INSENSITIVE);
-        if (pattern != null) {
-            Matcher matcher = pattern.matcher(name);
-            if (matcher != null) return matcher.matches();
+        if(mSuffixRegex != null){
+            Pattern pattern = Pattern.compile(mSuffixRegex, Pattern.CASE_INSENSITIVE);
+            if (pattern != null) {
+                Matcher matcher = pattern.matcher(name);
+                if (matcher != null) return matcher.matches();
+            }
         }
         return false;
     }
