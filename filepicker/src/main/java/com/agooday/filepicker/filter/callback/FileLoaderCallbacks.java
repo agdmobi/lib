@@ -267,14 +267,17 @@ public class FileLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cursor
     private boolean contains(String path) {
         String name = Util.extractFileNameWithSuffix(path);
         Pattern pattern = Pattern.compile(mSuffixRegex, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(name);
-        return matcher.matches();
+        if (pattern != null) {
+            Matcher matcher = pattern.matcher(name);
+            if (matcher != null) return matcher.matches();
+        }
+        return false;
     }
 
     private String obtainSuffixRegex(String[] suffixes) {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < suffixes.length ; i++) {
-            if (i ==0) {
+        for (int i = 0; i < suffixes.length; i++) {
+            if (i == 0) {
                 builder.append(suffixes[i].replace(".", ""));
             } else {
                 builder.append("|\\.");
