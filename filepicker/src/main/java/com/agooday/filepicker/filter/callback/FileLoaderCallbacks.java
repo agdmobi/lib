@@ -269,6 +269,7 @@ public class FileLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cursor
         Log.d(this.getClass().getSimpleName(),"tien.hien path = "+path);
         String name = Util.extractFileNameWithSuffix(path);
         Log.d(this.getClass().getSimpleName(),"tien.hien name = "+name);
+        Log.d(this.getClass().getSimpleName(),"tien.hien mSuffixRegex = "+mSuffixRegex);
         Pattern pattern = Pattern.compile(mSuffixRegex, Pattern.CASE_INSENSITIVE);
         Log.d(this.getClass().getSimpleName(),"tien.hien pattern = null "+(pattern == null));
         if (pattern != null) {
