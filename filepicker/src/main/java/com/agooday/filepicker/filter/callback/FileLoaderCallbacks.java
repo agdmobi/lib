@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import com.agooday.filepicker.Util;
 import com.agooday.filepicker.filter.entity.*;
 import com.agooday.filepicker.filter.loader.AudioLoader;
@@ -265,8 +266,11 @@ public class FileLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cursor
     }
 
     private boolean contains(String path) {
+        Log.d(this.getClass().getSimpleName(),"tien.hien path = "+path);
         String name = Util.extractFileNameWithSuffix(path);
+        Log.d(this.getClass().getSimpleName(),"tien.hien name = "+name);
         Pattern pattern = Pattern.compile(mSuffixRegex, Pattern.CASE_INSENSITIVE);
+        Log.d(this.getClass().getSimpleName(),"tien.hien pattern = null "+(pattern == null));
         if (pattern != null) {
             Matcher matcher = pattern.matcher(name);
             if (matcher != null) return matcher.matches();
