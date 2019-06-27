@@ -565,6 +565,8 @@ public class ADGPreference implements SharedPreferences {
                     } else {
                         contentResolver.update(uri, contentValues, stringSetValueArray.toString(), stringSetKeyList.size() > 0 ? stringSetKeyList.toArray(new String[stringSetKeyList.size()]) : null);
                     }
+                }catch (Exception e){
+                    
                 } finally {
                     releaseClientSilently(client);
                 }
