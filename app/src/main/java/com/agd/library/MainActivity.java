@@ -1,6 +1,7 @@
 package com.agd.library;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.agd.filepicker.filter.entity.AudioFile;
 import com.agd.filepicker.filter.entity.ImageFile;
 import com.agd.filepicker.filter.entity.NormalFile;
 import com.agd.filepicker.filter.entity.VideoFile;
+import com.agd.preference.SharedPreferenceManager;
 
 import java.util.ArrayList;
 

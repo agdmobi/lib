@@ -27,4 +27,6 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation project(path: ':daterangepicker')
     implementation project(path: ':filepicker')
+    implementation project(path: ':preference')
+    implementation project(path: ':customview')
 }
