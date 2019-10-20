@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.agooday.filepicker">
+          package="com.agd.filepicker">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -9,24 +9,24 @@
             android:supportsRtl="true">
 
         <activity
-                android:name=".activity.ImagePickActivity"
+                android:name="com.agd.filepicker.activity.ImagePickActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/vw_FilePickerTheme" />
 
-        <activity android:name=".activity.ImageBrowserActivity"
+        <activity android:name="com.agd.filepicker.activity.ImageBrowserActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/vw_FilePickerTheme"
                   android:hardwareAccelerated="false" />
 
-        <activity android:name=".activity.VideoPickActivity"
+        <activity android:name="com.agd.filepicker.activity.VideoPickActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/vw_FilePickerTheme" />
 
-        <activity android:name=".activity.AudioPickActivity"
+        <activity android:name="com.agd.filepicker.activity.AudioPickActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/vw_FilePickerTheme" />
 
-        <activity android:name=".activity.NormalFilePickActivity"
+        <activity android:name="com.agd.filepicker.activity.NormalFilePickActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/vw_FilePickerTheme" />
         <provider

@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.agooday.preference">
+          package="com.agd.preference">
 
     <application
             android:allowBackup="true"
             android:supportsRtl="true">
         <provider
-                android:name=".AGDProvider"
-                android:authorities="@string/agooday_author"
+                android:name="com.agd.preference.AGDProvider"
+                android:authorities="@string/agd_author"
                 android:exported="false"/>
 
     </application>
