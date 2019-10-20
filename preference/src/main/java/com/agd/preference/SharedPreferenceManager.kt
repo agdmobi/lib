@@ -2,10 +2,14 @@ package com.agd.preference
 
 import android.content.Context
 
-class SharedPreferenceManager{
+ class SharedPreferenceManager{
     lateinit var sADGPreferences: ADGPreference
     fun initialize(context: Context) {
         sADGPreferences = ADGPreference(context)
+    }
+
+    fun getSharedPreference() :ADGPreference{
+        return sADGPreferences
     }
 
     companion object {
